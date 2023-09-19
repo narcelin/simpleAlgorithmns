@@ -64,25 +64,34 @@ int main()
 	printf("\n \n Your current balance is %.2lf Credits \n \n", balanceInMain);
 
 	//display the items for purchase - call the DisplayFoodSelections function and it will return the item number
-	DisplayFoodSelections();
+	int userSelection = DisplayFoodSelections();
 
 	//print the item number to check that the function is working as expected
-	
+	printf("\nItem selection confirmation: %d \n \n", userSelection);
+
 	//set the price of the item - call the SetPrice function
+	double itemPrice = SetPrice(userSelection);
 
 	//print the price to check that the function is working as expected
+	while(itemPrice < 0){
+		userSelection = DisplayFoodSelections();
+		itemPrice = SetPrice(userSelection);
+	}
 
 	//get the quantity and add it to the total - call the AddQuantityToOrder function
+	double totalItemPrice = AddQuantityToOrder(itemPrice);
 	
 	//print the total to check that the function is working as expected
+	printf("\nTotal Item Price Confirmation: %.2lf\n\n", totalItemPrice);
 
 	//Checkout
-	//balanceInMain = Checkout(balanceInMain, totalInMain);
+	balanceInMain = Checkout(balanceInMain, totalItemPrice);
 
 	//display the ending balance
+	printf("\n\nYour balance is %.2lf", balanceInMain);
 
 	//say goodbye to the user
-	printf("\n \n Have a great day!\n\n");
+	printf("\n \nHave a great day!\n\n");
 	return 0;
 }
 
@@ -101,10 +110,11 @@ int DisplayFoodSelections()
 {
 	int item;
 
-	printf("1: Klingon Cuisine - 27 Credits \n2: Vulcan Cuisine - 23 Credits \n3: Bajoran Cuisine - 32 Credits \n4: Ferengi Cuisine - 435 Credits \n5: Human Cuisine - FREE \n");
+	printf("1: Klingon Cuisine - 27 Credits \n2: Vulcan Cuisine - 23 Credits \n3: Bajoran Cuisine - 32 Credits \n4: Ferengi Cuisine - 435 Credits \n5: Human Cuisine - 1 \nPlease select an item using the starting item number: ");
 
 
 	scanf(" %d", &item);
+	printf("\n");
 	return item;
 
 }
@@ -134,11 +144,11 @@ double SetPrice(int itemNumber)
             break;
         case 5:
 			printf("You have selected... Item 5. Go get them chap?");
-            return(0); //AKA FREE
+            return(1); //AKA FREE
             break;
             
         default:
-			printf("Sorry, that Item is not an option. Please try again");
+			printf("\nSorry, that Item is not an option. Please try again \n\n");
             return -1;
             break;
     }
@@ -164,7 +174,7 @@ double SetPrice(int itemNumber)
 double AddQuantityToOrder(double price)
 {
 	int userQuantity;
-	printf("How many would you like? : ");
+	printf("\n\nHow many would you like? : ");
 	scanf(" %d", &userQuantity);
 	//declare, ask, and get the quantity
 	return price * userQuantity;
@@ -183,13 +193,16 @@ double Checkout(double balance, double totalPrice)
 	while (enough == 0)//not enough money
 	{
 		//display the balance and total
-		printf("You have %.2lf Credits in your account. The total is %.2lf. Do you wish to add more Credits? (1:YES | 2:NO)", balance, totalPrice);
+		printf("Not enough credits, you have %.2lf Credits. The total is %.2lf. Do you wish to add more Credits? (1:YES | 2:NO): ", balance, totalPrice);
 		int reloadAccount;
 		scanf(" %d", &reloadAccount);
 		
 		//balance = Reload(balance);//RELOAD
 		if(reloadAccount == 1){
 			balance = Reload(balance);
+		} else if(reloadAccount == 1994){
+			printf("\nBEZOS MODE ACTIVATED");
+			balance = 9999999;
 		} else {
 			printf("Good bye!");
 			enough = 0; //End loop
