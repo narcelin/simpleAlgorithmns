@@ -14,35 +14,95 @@ void Greeting(void){
 };
 //welcome the user to the food purchasing app
 
+double SetPrice(int itemNumber);
+//Function decloration to fix error. I would move the entire function here, but did not want to move it around too much for grading
+
 int DisplayFoodSelections(){
     
     printf("1: Klingon Cuisine - 27 Credits \n 2: Vulcan Cuisine - 23 Credits \n 3:Bajoran Cuisine - 32 Credits \n 4: Ferengi Cuisine - 435 Credits \n 5: Betazoid Cuisine - 48 Credits 6: Cardassian Cuisine - 13 Credits 7: Romulan Cuisine - 25 Credits 8:Andorian Cuisine - 75 Credits \n 9: Bolian Cuisine - 38 Credits \n 10: Qomar Cuisine - 17 Credits \n 11: Horta Cuisine - 9 Credits \n 12: Human Cuisine - FREE \n");
     
     int userSelection;
     
-    scanf("Please select an item %d", &userSelection);
+    printf("Please select an item: ");
+    scanf(" %d", &userSelection);
     
-    return userSelection;
+    return (int)SetPrice(userSelection);
 };
 //display the food choices, the price, and related item number
 //declare, ask, get the item number
 //return the price of the item
 
-double SetPrice(int itemNumber);
+double SetPrice(int itemNumber){
+    
+    switch (itemNumber) {
+        case 1:
+            return(27);
+            break;
+        case 2:
+            return(23);
+            break;
+        case 3:
+            return(32);
+            break;
+        case 4:
+            return(435);
+            break;
+        case 5:
+            return(48);
+            break;
+        case 6:
+            return(13);
+            break;
+        case 7:
+            return(25);
+            break;
+        case 8:
+            return(75);
+            break;
+        case 9:
+            return(38);
+            break;
+        case 10:
+            return(17);
+            break;
+        case 11:
+            return(9);
+            break;
+        case 12:
+            return(0); //AKA FREE
+            break;
+            
+        default:
+            return -1;
+            break;
+    }
+};
 //input: item number
 //use the item number to identify the price
 //return the price
 
-double AddQuantityToOrder(double price);
+double AddQuantityToOrder(double price){
+    int userQuantity;
+    
+    printf("Your order will cost you %f Credits. How many would you like? (QTY)");
+    scanf(" %d", &userQuantity);
+    
+    double totalPrice = userQuantity * price;
+    
+    printf("Your total for this item is %f", totalPrice);
+    return totalPrice;
+};
 //input: price of the item
 //declare ask and get the quantity
 //calculate and return the item total
 //return the total
 
-double Checkout(double balance, double totalPrice);
+double Checkout(double balance, double totalPrice){
+    
+};
 //input: amount of money in the account and the order total
 //return: the amount left in the account after making the purchase
-//Uses the Reload and checkFor Enough functions
+//Uses the Reload and checkForEnough functions
 //to get money from the user until the user has enough to make the purchase
 //make the purchase and return the remaining balance
 
@@ -68,14 +128,17 @@ int main()
     double totalInMain = 0.0;
     int itemNumber;
 
-    Greeting();
     //greet the user - Greeting function call
+    Greeting();
     
     //display the balance, at this point is should be $20.00
+    printf("You have a total of %f Credits to your account", balanceInMain);
     
     //display the items for purchase - call the DisplayFoodSelections function and it will return the item number
+    int userSelection = DisplayFoodSelections();
     
     //print the item number to check that the function is working as expected
+    printf(" %d", userSelection);
     
     //set the price of the item - call the SetPrice function
 
