@@ -110,7 +110,7 @@ int DisplayFoodSelections()
 {
 	int item;
 
-	printf("1: Klingon Cuisine - 27 Credits \n2: Vulcan Cuisine - 23 Credits \n3: Bajoran Cuisine - 32 Credits \n4: Ferengi Cuisine - 435 Credits \n5: Human Cuisine - 1 \nPlease select an item using the starting item number: ");
+	printf("1: Klingon Cuisine - 27 Credits \n2: Vulcan Cuisine - 23 Credits \n3: Bajoran Cuisine - 32 Credits \n4: Ferengi Cuisine - 435 Credits \n5: Human Cuisine - 1 \nPlease select an item using the starting item number only: ");
 
 
 	scanf(" %d", &item);
