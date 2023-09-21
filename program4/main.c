@@ -1,5 +1,12 @@
 /*COP 2220  (program 4) - 
 //add you name, date and description here*/
+/*
+	Nicolas Arcelin
+	
+	September 2023
+
+	Interactive program using functions from stdio.h(printf and scanf), math in C, conditions, a while loop, and programmer defined functions. (Sorgente, 2023, as cited in Canvas)
+*/
 
 #define _CRT_SECURE_NO_WARNINGS //for Visual Studio compiler
 #pragma warning(disable:6031) //ignore scanf warnings
